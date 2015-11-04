@@ -1,0 +1,35 @@
+﻿@model CapModel.Recruiter
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="common-bg">
+    <div class="container">
+        <h2>Recruiter Main</h2>
+        @using (Html.BeginForm("Edit", "Recruiter", new { id = "1" }, FormMethod.Get))
+        {
+            <input type="submit" value="Edit Profile" class="btn btn-default" />
+        }
+        <br />
+
+
+        @using (Html.BeginForm("Create", "JobPosting", FormMethod.Get))
+        {
+            <input type="submit" value="Post Jobs" class="btn btn-default" />
+        }
+        <br />
+
+
+        @using (Html.BeginForm("Details", "JobPosting", FormMethod.Get))
+        {
+            <input type="submit" value="Details" class="btn btn-default" />
+        }
+        <br />
+
+
+        @using (Html.BeginForm("SearchUser", "Search", FormMethod.Get))
+        {
+            <input type="submit" value="Search Users" class="btn btn-default" />
+        }
+    </div>
+</div>

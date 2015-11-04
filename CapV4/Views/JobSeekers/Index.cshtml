@@ -1,0 +1,28 @@
+﻿@model IEnumerable<CapModel.JobSeeker>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="common-bg">
+    <div class="container">
+        <h2>Job Seeker</h2>
+
+
+        @using (Html.BeginForm("Edit", "JobSeeker", FormMethod.Get))
+        {
+            <input type="submit" value="Edit Profile" class="btn btn-default" />
+        }
+        <br />
+
+        @using (Html.BeginForm("Index", "JobPosting", FormMethod.Get))
+        {
+            <input type="submit" value="Search Jobs" class="btn btn-default" />
+        }
+        <br />
+
+
+        @using (Html.BeginForm("Index", "Video", FormMethod.Get))
+        {
+            <input type="submit" value="Create Video Resume" class="btn btn-default" /> }
+    </div>
+</div>

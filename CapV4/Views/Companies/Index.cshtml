@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CapModel.Company>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="common-bg">
+    <div class="container">
+        <h2>Index</h2>
+
+        @using (Html.BeginForm("Edit", "Company", FormMethod.Get))
+        {
+            <input type="submit" value="Edit Profile" class="btn btn-default" />
+        }
+        <br />
+        @using (Html.BeginForm("Create", "NewsPosts", FormMethod.Get))
+        {
+            <input type="submit" value="Post News" class="btn btn-default" />
+        }
+        <br />
+        @using (Html.BeginForm("Index", "NewsPosts", FormMethod.Get))
+        {
+            <input type="submit" value="View All News Post" class="btn btn-default" />
+        }
+        <br />
+        @using (Html.BeginForm("SearchUser", "Search", FormMethod.Get))
+        {
+            <input type="submit" value="Search Users" class="btn btn-default" />
+        }
+        <br />
+        @using (Html.BeginForm("ManageRecruiter", "Company"))
+        {
+            <input type="submit" value="Manager Recruiters" class="btn btn-default" />
+        }
+    </div>
+</div>
+
