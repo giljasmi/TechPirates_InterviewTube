@@ -6,7 +6,7 @@
 //     Manual changes to this file will be overwritten if the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-using System.ComponentModel.DataAnnotations;
+
 namespace CapModel
 {
     using System;
@@ -16,16 +16,9 @@ namespace CapModel
     {
         public int NPId { get; set; }
         public string Title { get; set; }
-
-        [Display(Name="Description")]
         public string NewsDesc { get; set; }
-
-        [Display(Name="Date")]
         public string NewsDate { get; set; }
-
         public string IsVisible { get; set; }
-
-        [Display(Name="Company Name")]
         public int CompanyCompId { get; set; }
     
         public virtual Company Company { get; set; }
