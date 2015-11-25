@@ -63,7 +63,7 @@ namespace CapV4.Models
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Required]
+      
         [DataType(DataType.Text)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }

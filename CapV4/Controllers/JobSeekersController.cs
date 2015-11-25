@@ -10,6 +10,7 @@ using CapModel;
 
 namespace CapV4.Controllers
 {
+    [Authorize]
     public class JobSeekersController : Controller
     {
         private Model1Container db = new Model1Container();

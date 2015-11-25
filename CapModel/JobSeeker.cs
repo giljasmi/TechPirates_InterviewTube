@@ -25,7 +25,6 @@ namespace CapModel
     
         public int JSId { get; set; }
         public string SkillSummary { get; set; }
-        public string PhoneNumber { get; set; }
         public string Visibility { get; set; }
         public string UserName { get; set; }
     

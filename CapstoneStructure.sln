@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapModel", "CapModel\CapMod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapV4", "CapV4\CapV4.csproj", "{DFA6C977-4F72-41B3-9CA9-53782CE52E87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapV5", "CapV5\CapV5.csproj", "{BEEE6BAB-6AC5-4FA0-9224-0592F411F30C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DFA6C977-4F72-41B3-9CA9-53782CE52E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFA6C977-4F72-41B3-9CA9-53782CE52E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFA6C977-4F72-41B3-9CA9-53782CE52E87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEEE6BAB-6AC5-4FA0-9224-0592F411F30C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEEE6BAB-6AC5-4FA0-9224-0592F411F30C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEEE6BAB-6AC5-4FA0-9224-0592F411F30C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEEE6BAB-6AC5-4FA0-9224-0592F411F30C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

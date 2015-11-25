@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0f722632334b48e3b4961f48c1edb258" Name="Diagram1">
+        <EntityTypeShape EntityType="CapstoneDB1Model.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.AspNetRole" Width="1.5" PointX="5.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.AspNetUserLogin" Width="1.5" PointX="10.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.AspNetUser" Width="1.5" PointX="8" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.Certification" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.Company" Width="1.5" PointX="3.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.Country" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.Education" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.Follower" Width="1.5" PointX="8.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.JobApplied" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.JobCategory" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.JobPosting" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.JobSeeker" Width="1.5" PointX="0.75" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.Location" Width="1.5" PointX="6" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.NewsPost" Width="1.5" PointX="6" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.Recruiter" Width="1.5" PointX="1.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.SkillCollection" Width="1.5" PointX="3" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.UserMedia" Width="1.5" PointX="6" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.UserProfile" Width="1.5" PointX="3" PointY="31.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CapstoneDB1Model.WorkExperience" Width="1.5" PointX="3" PointY="34.125" IsExpanded="true" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_JobSeekerCertification" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_CompanyJobPosting" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_CompanyLocation1" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_CompanyNewsPost" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_CompanyRecruiter" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_CompanyUserMedia" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_JobSeekerEducation" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_JobPostingJobApplied" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_JobSeekerJobApplied" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_JobPostingLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_JobPostingUserMedia" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_RecruiterJobPosting" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_JobSeekerLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_JobSeekerSkillCollection" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_JobSeekerUserMedia" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_JobSeekerUserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_JobSeekerWorkExperience" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.FK_RecruiterLocation" ManuallyRouted="false" />
+        <AssociationConnector Association="CapstoneDB1Model.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -11,7 +11,7 @@ using CapModel;
 
 namespace CapV4.Controllers
 { 
-
+    [Authorize]
     public class RecruitersController : Controller
     {
         Model1Container db = new Model1Container();
@@ -19,6 +19,7 @@ namespace CapV4.Controllers
         // GET: Recruiters
         public ActionResult Index()
         {
+           ViewBag.id = User.Identity.GetUserId();
             return View();
         }
 
@@ -31,7 +32,7 @@ namespace CapV4.Controllers
         // GET: Recruiters/Create
         public ActionResult Create()
         {
-            ViewData["company"] = GetCompany();
+        
 
             return View();
         }

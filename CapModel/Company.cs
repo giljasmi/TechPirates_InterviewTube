@@ -25,7 +25,7 @@ namespace CapModel
         public string CompName { get; set; }
         public string CompCode { get; set; }
         public string CompDescription { get; set; }
-        public int NumFollowers { get; set; }
+        public Nullable<int> NumFollowers { get; set; }
         public string UserName { get; set; }
     
         public virtual ICollection<Recruiter> Recruiters { get; set; }

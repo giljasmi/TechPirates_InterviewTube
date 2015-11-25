@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/04/2015 03:15:45
+-- Date Created: 11/18/2015 10:45:31
 -- Generated from EDMX file: C:\Users\Jasmine Gill\Documents\Visual Studio 2013\Projects\CapstoneStructure\CapModel\Model1.edmx
 -- --------------------------------------------------
 
@@ -148,9 +148,9 @@ GO
 -- Creating table 'Recruiters'
 CREATE TABLE [dbo].[Recruiters] (
     [RecId] int IDENTITY(1,1) NOT NULL,
-    [Department] nvarchar(max)  NOT NULL,
-    [JobTitle] nvarchar(max)  NOT NULL,
-    [HasAccess] nvarchar(max)  NOT NULL,
+    [Department] nvarchar(max)  NULL,
+    [JobTitle] nvarchar(max)  NULL,
+    [HasAccess] nvarchar(max)  NULL,
     [CompanyCompId] int  NOT NULL,
     [UserName] nvarchar(max)  NULL
 );
@@ -160,8 +160,7 @@ GO
 CREATE TABLE [dbo].[JobSeekers] (
     [JSId] int IDENTITY(1,1) NOT NULL,
     [SkillSummary] nvarchar(max)  NULL,
-    [PhoneNumber] nvarchar(max)  NULL,
-    [Visibility] nvarchar(max)  NOT NULL,
+    [Visibility] nvarchar(max)  NULL,
     [UserName] nvarchar(max)  NULL
 );
 GO
@@ -218,9 +217,9 @@ CREATE TABLE [dbo].[Companies] (
     [CompId] int IDENTITY(1,1) NOT NULL,
     [CompName] nvarchar(max)  NOT NULL,
     [CompCode] nvarchar(max)  NOT NULL,
-    [CompDescription] nvarchar(max)  NOT NULL,
-    [NumFollowers] int  NOT NULL,
-    [UserName] nvarchar(max)  NULL
+    [CompDescription] nvarchar(max)  NULL,
+    [NumFollowers] int  NULL,
+    [UserName] nvarchar(max)  NOT NULL
 );
 GO
 

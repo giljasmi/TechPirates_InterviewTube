@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using CapV4.Models;
+using CapModel;
+
 
 
 namespace CapV4.Controllers
@@ -18,6 +20,7 @@ namespace CapV4.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private Model1Container db = new Model1Container();
         private ApplicationUserManager _userManager;
         public AccountController()
         {
@@ -28,7 +31,8 @@ namespace CapV4.Controllers
             UserManager = userManager;
         }
 
-        public ApplicationUserManager UserManager {
+        public ApplicationUserManager UserManager
+        {
             get
             {
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -61,23 +65,27 @@ namespace CapV4.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
-                   
+
                     if (user.UserType.Equals("R"))
                     {
-                       
-                        return View("~/Views/Recruiters/Index.cshtml"); 
+                        //Recruiter r = new Recruiter
+                        //{
+                        //    Department = "",
+                        //    JobTitle
+                        //}
+                        //return View("~/Views/Recruiters/Index.cshtml"); 
                     }
 
                     else if (user.UserType.Equals("J"))
                     {
-                        return View("~/Views/JobSeekers/Index.cshtml"); 
+                        return View("~/Views/JobSeekers/Index.cshtml");
                     }
                     else if (user.UserType.Equals("C"))
-                    {                       
-                        return View("~/Views/Companies/Index.cshtml"); 
+                    {
+                        return View("~/Views/Companies/Index.cshtml");
                     }
-                  
-                   
+
+
                 }
                 else
                 {
@@ -94,6 +102,9 @@ namespace CapV4.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+
+
+            ViewData["Company"] = GetCompany();
             return View();
         }
 
@@ -102,48 +113,88 @@ namespace CapV4.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register([Bind(Exclude = "VerCode")]RegisterViewModel model)
+        public async Task<ActionResult> Register([Bind(Exclude = "VerCode")]RegisterViewModel model, FormCollection form)
         {
+            int typeId = 0;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() {
+                var user = new ApplicationUser()
+                {
                     UserName = model.Email,
                     Email = model.Email,
-                   FirstName = model.FirstName,
-                   LastName = model.LastName,
-                   UserType = model.UserType,
-                   VerCode = randomString(32)
-                   
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    UserType = model.UserType,
+                    VerCode = randomString(32)
+
                 };
 
-               
+                if (user.UserType.Equals("R"))
+                {
+                    string compname = form["company"].ToString();
+                    var compid = from c in db.Companies
+                                 where c.CompName == compname
+                                 select c.CompId;
+                    Recruiter r = new Recruiter
+                    {
+                        Department = form["dept"].ToString(),
+                        JobTitle = form["jobtitle"].ToString(),
+                        HasAccess = "T",
+                        CompanyCompId = Convert.ToInt32(compid),
+                        UserName = user.Id
+                    };
+                    db.Recruiters.Add(r);
+                    db.SaveChanges();
+                   typeId = r.RecId;
+                }
+
+                else if (user.UserType.Equals("J"))
+                {
+                    JobSeeker js = new JobSeeker
+                    {
+                        SkillSummary = form["sksum"].ToString(),
+                        Visibility = "T",
+                        UserName = user.Id
+                    };
+                    db.JobSeekers.Add(js);
+                    db.SaveChanges();
+
+                    typeId = js.JSId;
+                }
+                else if (user.UserType.Equals("C"))
+                {
+                    Company c = new Company
+                    {
+                        CompName = user.FirstName + user.LastName,
+                        CompCode = form["code"].ToString(),
+                        CompDescription = form["desc"].ToString(),
+                        NumFollowers = null,
+                        UserName = user.Id
+                    };
+
+                    db.Companies.Add(c);
+                    db.SaveChanges();
+                    typeId = c.CompId;
+                }
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                
+
                     await SignInAsync(user, isPersistent: false);
-                    if (user.UserType.Equals("R"))
-                    {
 
-                        return View("~/Views/Recruiters/Index.cshtml");
-                    }
+                    if (profileLink(user.UserType,typeId)!= null){
+                    
 
-                    else if (user.UserType.Equals("J"))
-                    {
-                        return View("~/Views/JobSeekers/Create.cshtml");
-                    }
-                    else if (user.UserType.Equals("C"))
-                    {
-                        return View("~/Views/Companies/Create.cshtml");
-                    }
-                  
+                    return View(profileLink(user.UserType, typeId), typeId);
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    
+                    }
+                    else {
                     return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {
@@ -160,7 +211,7 @@ namespace CapV4.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
-            if (userId == null || code == null) 
+            if (userId == null || code == null)
             {
                 return View("Error");
             }
@@ -220,13 +271,13 @@ namespace CapV4.Controllers
         {
             return View();
         }
-	
+
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            if (code == null) 
+            if (code == null)
             {
                 return View("Error");
             }
@@ -454,13 +505,13 @@ namespace CapV4.Controllers
                     if (result.Succeeded)
                     {
                         await SignInAsync(user, isPersistent: false);
-                        
+
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
                         // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
-                        
+
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -570,7 +621,8 @@ namespace CapV4.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 
@@ -598,11 +650,62 @@ namespace CapV4.Controllers
         #endregion
         public static string randomString(int length)
         {
-           
+
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz~`!@#$%^&*()_+-={}[]:<>?,./|\\";
             var random = new Random();
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+        public SelectList GetCompany()
+        {
+            var company = from Company in db.Companies
+                          group Company by Company.CompName into unique
+                          select unique.FirstOrDefault();
+
+            
+             return new SelectList(company, "CompName", "CompName", "CompId");
+
+        }
+
+
+        public List<CompanyVM> GetCompanyNameCode()
+        {
+            List<Company> companies = db.Companies.ToList();
+
+            List<CompanyVM> cvms = new List<CompanyVM>();
+
+            CompanyVM cvm = new CompanyVM();
+
+            foreach (Company c in companies)
+            {
+                cvm.CCode = c.CompCode;
+                cvm.CName = c.CompName;
+                cvms.Add(cvm);
+            }
+            return cvms;
+        }
+
+        public string profileLink(string type, int id)
+        {
+            if (type == "R")
+            {
+                return "~/Views/Recruiters/Edit.cshtml";
+            }
+            else if (type == "J")
+            {
+                return "~/Views/JobSeekers/Edit" ;
+            }
+
+            else if (type == "C")
+            {
+                return "~/Views/Companies/Edit.cshtml";
+            }
+
+            else
+            {
+                return null;
+            }
         }
     }
 }

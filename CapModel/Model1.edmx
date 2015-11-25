@@ -116,9 +116,9 @@
       <PropertyRef Name="RecId" />
     </Key>
     <Property Name="RecId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Department" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="JobTitle" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="HasAccess" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Department" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="JobTitle" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="HasAccess" Type="nvarchar(max)" Nullable="true" />
     <Property Name="CompanyCompId" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
@@ -128,8 +128,7 @@
     </Key>
     <Property Name="JSId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="SkillSummary" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Visibility" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Visibility" Type="nvarchar(max)" Nullable="true" />
     <Property Name="UserName" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="SkillCollections">
@@ -186,9 +185,9 @@
     <Property Name="CompId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CompName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CompCode" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="CompDescription" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="NumFollowers" Type="int" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CompDescription" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="NumFollowers" Type="int" Nullable="true" />
+    <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Followers">
     <Key>
@@ -587,7 +586,7 @@
             <End Role="Recruiter" EntitySet="Recruiters" />
             <End Role="Location" EntitySet="Locations" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Location">
           <Key>
             <PropertyRef Name="LocationId" />
@@ -609,9 +608,9 @@
             <PropertyRef Name="RecId" />
           </Key>
           <Property Name="RecId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Department" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="JobTitle" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="HasAccess" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Department" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="JobTitle" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="HasAccess" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Company" Relationship="Model1.CompanyRecruiter" FromRole="Recruiter" ToRole="Company" />
           <Property Name="CompanyCompId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="JobPostings" Relationship="Model1.RecruiterJobPosting" FromRole="Recruiter" ToRole="JobPosting" />
@@ -624,8 +623,7 @@
           </Key>
           <Property Name="JSId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SkillSummary" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="PhoneNumber" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="Visibility" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Visibility" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
           <NavigationProperty Name="Location" Relationship="Model1.JobSeekerLocation" FromRole="JobSeeker" ToRole="Location" />
           <NavigationProperty Name="Certifications" Relationship="Model1.JobSeekerCertification" FromRole="JobSeeker" ToRole="Certification" />
           <NavigationProperty Name="Educations" Relationship="Model1.JobSeekerEducation" FromRole="JobSeeker" ToRole="Education" />
@@ -734,13 +732,13 @@
           <Property Name="CompId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CompName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="CompCode" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="CompDescription" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="NumFollowers" Type="Int32" Nullable="false" />
+          <Property Name="CompDescription" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="NumFollowers" Type="Int32" Nullable="true" />
           <NavigationProperty Name="Recruiters" Relationship="Model1.CompanyRecruiter" FromRole="Company" ToRole="Recruiter" />
           <NavigationProperty Name="NewsPosts" Relationship="Model1.CompanyNewsPost" FromRole="Company" ToRole="NewsPost" />
           <NavigationProperty Name="JobPostings" Relationship="Model1.CompanyJobPosting" FromRole="Company" ToRole="JobPosting" />
           <NavigationProperty Name="UserMedia" Relationship="Model1.CompanyUserMedia" FromRole="Company" ToRole="UserMedia" />
-          <Property Name="UserName" Type="String" Nullable="true" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Location" Relationship="Model1.CompanyLocation1" FromRole="Company" ToRole="Location" />
         </EntityType>
         <Association Name="CompanyRecruiter">
@@ -951,7 +949,7 @@
           <End Type="Model1.Recruiter" Role="Recruiter" Multiplicity="0..1" />
           <End Type="Model1.Location" Role="Location" Multiplicity="0..1" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -987,7 +985,6 @@
         <MappingFragment StoreEntitySet="JobSeekers">
           <ScalarProperty Name="JSId" ColumnName="JSId" />
           <ScalarProperty Name="SkillSummary" ColumnName="SkillSummary" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
           <ScalarProperty Name="Visibility" ColumnName="Visibility" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
         </MappingFragment>
